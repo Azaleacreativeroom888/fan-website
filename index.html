@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Web制作ノート</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #333;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Web制作ノート</h1>
+  <p>作りながら学ぶ、自分用Web開発ログ</p>
+</header>
+
+<div class="container">
+  <div class="grid">
+    <a href="basics.html" class="card">
+      <h2>① 基礎</h2>
+      <p>Webの仕組みやHTML/CSSの基本</p>
+    </a>
+
+    <a href="github.html" class="card">
+      <h2>② 公開</h2>
+      <p>GitHubでの管理と公開方法</p>
+    </a>
+
+    <a href="blog.html" class="card">
+      <h2>③ ブログ</h2>
+      <p>学びや気づきを記録</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  © 2026 Web Note
+</footer>
+
+</body>
+</html>
