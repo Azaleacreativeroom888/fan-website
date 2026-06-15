@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Column — GREEN GRID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:     #7CB82F;
+      --green-lt:  #A8D45E;
+      --green-bg:  #F2F8E8;
+      --red:       #D63B3B;
+      --red-lt:    #F2A0A0;
+      --dark:      #1E2D0E;
+      --mid:       #4A6322;
+      --white:     #FFFFFF;
+      --serif:     'Syne', sans-serif;
+      --sans:      'Inter', sans-serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--green-bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 2px solid var(--green);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--dark); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--red); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      border-bottom: 1px solid rgba(124,184,47,0.25);
+      background: var(--white);
+      padding: 2.8rem 2rem 2rem;
+    }
+    .page-header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    /* ── COLUMN LIST ── */
+    .column-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .column-card {
+      background: var(--white);
+      border: 1.5px solid rgba(124,184,47,0.25);
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .column-card:hover { border-color: var(--green); }
+
+    /* カードヘッダー */
+    .column-card-head {
+      padding: 1.6rem 2rem 1.2rem;
+      border-bottom: 1px solid rgba(124,184,47,0.15);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+    .column-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--white);
+      background: var(--green);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+    }
+    .column-head-text {}
+    .column-date {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--mid);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .column-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    /* カードボディ */
+    .column-card-body {
+      padding: 1.4rem 2rem 1.6rem;
+    }
+    .column-summary {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 1.4rem;
+    }
+
+    /* ポイントリスト */
+    .point-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .point-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--dark);
+    }
+    .point-item::before {
+      content: '▸';
+      color: var(--green);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* コードスニペット */
+    .code-block {
+      background: var(--dark);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin-top: 1.2rem;
+      overflow-x: auto;
+    }
+    .code-block code {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.75;
+      color: var(--green-lt);
+      white-space: pre;
+    }
+    .code-block code .cm { color: rgba(255,255,255,0.35); }
+    .code-block code .kw { color: var(--red-lt); }
+    .code-block code .vl { color: #A8D45E; }
+    .code-block code .pr { color: #fff; }
+
+    /* タグ */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--green);
+      border: 1px solid rgba(124,184,47,0.4);
+      border-radius: 3px;
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    footer a { color: var(--green-lt); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 1.2rem; }
+      nav a { font-size: 0.7rem; }
+      .column-card-head { flex-direction: column; gap: 0.5rem; }
+      .column-card-head, .column-card-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">GREEN<span>GRID</span></a>
+    <ul>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="column.html" class="active">Column</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <p class="page-eyebrow">// what i've learned</p>
+      <h1 class="page-title">Column</h1>
+    </div>
+  </div>
+
+  <!-- COLUMNS -->
+  <div class="column-wrap">
+
+    <!-- #01 -->
+    <article class="column-card">
+      <div class="column-card-head">
+        <span class="column-num">01</span>
+        <div class="column-head-text">
+          <p class="column-date">2025-01-15</p>
+          <h2 class="column-title">Flexbox 完全理解メモ</h2>
+        </div>
+      </div>
+      <div class="column-card-body">
+        <p class="column-summary">
+          Flexbox は「一方向のレイアウト」を担う仕組み。横並びにするだけでなく、余白の配分・揃え方・折り返しまで細かく制御できる。混乱しやすいプロパティの違いを整理した。
+        </p>
+        <div class="point-list">
+          <div class="point-item"><span>justify-content は主軸方向（横）の配置。flex-start / center / space-between など。</span></div>
+          <div class="point-item"><span>align-items は交差軸方向（縦）の各行内での揃え方。</span></div>
+          <div class="point-item"><span>align-content は複数行がある場合の行間の配分。1行だけのときは効かない。</span></div>
+          <div class="point-item"><span>flex-grow / flex-shrink / flex-basis は省略形 flex: 1 1 auto でまとめて指定できる。</span></div>
+        </div>
+        <div class="code-block"><code><span class="pr">.container</span> {
+  <span class="kw">display</span>: <span class="vl">flex</span>;
+  <span class="kw">justify-content</span>: <span class="vl">space-between</span>;
+  <span class="kw">align-items</span>: <span class="vl">center</span>;
+  <span class="kw">gap</span>: <span class="vl">1rem</span>;
+}</code></div>
+        <div class="tag-row">
+          <span class="tag">CSS</span>
+          <span class="tag">Flexbox</span>
+          <span class="tag">レイアウト</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- #02 -->
+    <article class="column-card">
+      <div class="column-card-head">
+        <span class="column-num">02</span>
+        <div class="column-head-text">
+          <p class="column-date">2025-01-08</p>
+          <h2 class="column-title">CSS カスタムプロパティで色を管理する</h2>
+        </div>
+      </div>
+      <div class="column-card-body">
+        <p class="column-summary">
+          CSS カスタムプロパティ（変数）を使うと、色・サイズ・フォントなどを一元管理できる。デザイントークンの考え方に近く、変更コストが劇的に下がる。
+        </p>
+        <div class="point-list">
+          <div class="point-item"><span>:root に定義すると全体から参照できるグローバル変数になる。</span></div>
+          <div class="point-item"><span>var(--変数名) で呼び出す。第二引数にフォールバック値を指定できる。</span></div>
+          <div class="point-item"><span>JavaScript からも getPropertyValue / setProperty で読み書きできる。</span></div>
+          <div class="point-item"><span>ダークモードの切り替えも @media (prefers-color-scheme) と組み合わせると楽。</span></div>
+        </div>
+        <div class="code-block"><code><span class="cm">/* 定義 */</span>
+<span class="pr">:root</span> {
+  <span class="kw">--color-primary</span>: <span class="vl">#7CB82F</span>;
+  <span class="kw">--color-accent</span>:  <span class="vl">#D63B3B</span>;
+}
+
+<span class="cm">/* 使用 */</span>
+<span class="pr">button</span> {
+  <span class="kw">background</span>: <span class="vl">var(--color-primary)</span>;
+}</code></div>
+        <div class="tag-row">
+          <span class="tag">CSS</span>
+          <span class="tag">カスタムプロパティ</span>
+          <span class="tag">デザイントークン</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- #03 -->
+    <article class="column-card">
+      <div class="column-card-head">
+        <span class="column-num">03</span>
+        <div class="column-head-text">
+          <p class="column-date">2024-12-28</p>
+          <h2 class="column-title">CSS Grid — auto-fill と auto-fit の違い</h2>
+        </div>
+      </div>
+      <div class="column-card-body">
+        <p class="column-summary">
+          repeat() の中で使う auto-fill と auto-fit は一見同じに見えるが、空のトラックの扱いが違う。minmax() と組み合わせることで真価を発揮する。
+        </p>
+        <div class="point-list">
+          <div class="point-item"><span>auto-fill：アイテムが少なくても空のトラックを残してカラムを維持する。</span></div>
+          <div class="point-item"><span>auto-fit：空のトラックを折り畳んで、アイテムが伸びて埋める。</span></div>
+          <div class="point-item"><span>どちらも minmax(最小幅, 1fr) と組み合わせるのがセオリー。</span></div>
+          <div class="point-item"><span>アイテムが多いときは両者の見た目は同じになる。</span></div>
+        </div>
+        <div class="code-block"><code><span class="cm">/* アイテムが少ないと挙動が変わる */</span>
+<span class="pr">.grid-fill</span> {
+  <span class="kw">grid-template-columns</span>:
+    <span class="vl">repeat(auto-fill, minmax(200px, 1fr))</span>;
+}
+<span class="pr">.grid-fit</span> {
+  <span class="kw">grid-template-columns</span>:
+    <span class="vl">repeat(auto-fit,  minmax(200px, 1fr))</span>;
+}</code></div>
+        <div class="tag-row">
+          <span class="tag">CSS</span>
+          <span class="tag">Grid</span>
+          <span class="tag">レスポンシブ</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- #04 -->
+    <article class="column-card">
+      <div class="column-card-head">
+        <span class="column-num" style="background: var(--red);">04</span>
+        <div class="column-head-text">
+          <p class="column-date">2024-12-18</p>
+          <h2 class="column-title">流体タイポグラフィ — clamp() の使い方</h2>
+        </div>
+      </div>
+      <div class="column-card-body">
+        <p class="column-summary">
+          clamp() を使うと、画面幅に応じてフォントサイズをなめらかに変化させながら、最小・最大の上限下限も同時に設定できる。メディアクエリなしで流体タイポグラフィが実現できる。
+        </p>
+        <div class="point-list">
+          <div class="point-item"><span>構文：clamp(最小値, 推奨値, 最大値)</span></div>
+          <div class="point-item"><span>推奨値に vw を使うと画面幅に比例して変化する。</span></div>
+          <div class="point-item"><span>vw だけだと小さい画面で極端に小さくなるため clamp で制御するのがベスト。</span></div>
+          <div class="point-item"><span>font-size だけでなく padding や gap にも使える。</span></div>
+        </div>
+        <div class="code-block"><code><span class="pr">h1</span> {
+  <span class="cm">/* 最小2rem、画面幅の5%、最大4rem */</span>
+  <span class="kw">font-size</span>: <span class="vl">clamp(2rem, 5vw, 4rem)</span>;
+}
+
+<span class="pr">.section</span> {
+  <span class="kw">padding</span>: <span class="vl">clamp(2rem, 8vw, 6rem)</span> <span class="vl">1rem</span>;
+}</code></div>
+        <div class="tag-row">
+          <span class="tag">CSS</span>
+          <span class="tag">タイポグラフィ</span>
+          <span class="tag">レスポンシブ</span>
+          <span class="tag">clamp</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>GREEN GRID &mdash; web design study log &nbsp;|&nbsp; <a href="about.html">about</a></p>
+  </footer>
+
+</body>
+</html>
