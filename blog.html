@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — GREEN GRID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:     #7CB82F;
+      --green-lt:  #A8D45E;
+      --green-bg:  #F2F8E8;
+      --red:       #D63B3B;
+      --red-lt:    #F2A0A0;
+      --dark:      #1E2D0E;
+      --mid:       #4A6322;
+      --white:     #FFFFFF;
+      --serif:     'Syne', sans-serif;
+      --sans:      'Inter', sans-serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--green-bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 2px solid var(--green);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--dark); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--red); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      border-bottom: 1px solid rgba(124,184,47,0.25);
+      background: var(--white);
+      padding: 2.8rem 2rem 2rem;
+    }
+    .page-header-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    /* ── FEED ── */
+    .feed {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 2px 1fr;
+      gap: 0 1.4rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(124,184,47,0.18);
+    }
+    .entry:last-child { border-bottom: none; }
+
+    /* 左の縦線 */
+    .entry-line {
+      background: rgba(124,184,47,0.25);
+      border-radius: 2px;
+      position: relative;
+    }
+    .entry-line::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .entry-body {}
+    .entry-date {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.55rem;
+    }
+    .entry-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    footer a { color: var(--green-lt); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 1.2rem; }
+      nav a { font-size: 0.7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">GREEN<span>GRID</span></a>
+    <ul>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="column.html">Column</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <p class="page-eyebrow">// study log</p>
+      <h1 class="page-title">Blog</h1>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div class="feed">
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2025-01-15</p>
+        <p class="entry-text">Flexbox の align-items と align-content の違いをようやく理解した。align-items は各行の中での揃え方、align-content は複数行まとめての揃え方。図に描いたらすっきりした。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2025-01-12</p>
+        <p class="entry-text">CSS カスタムプロパティで色管理が劇的に楽になった。--primary みたいな変数を :root に定義して使いまわすだけで、変更が一箇所で済む。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2025-01-08</p>
+        <p class="entry-text">font-size に rem を使う理由がわかった。px は固定だけど rem はルート要素に対する相対値だから、ブラウザのフォントサイズ設定を尊重できる。アクセシビリティのために大事。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2025-01-03</p>
+        <p class="entry-text">Grid の auto-fill と auto-fit、何度読んでも混乱するので図に描いてみた。空のトラックを残す（auto-fill）か潰す（auto-fit）かの違い。minmax と組み合わせると強い。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2024-12-28</p>
+        <p class="entry-text">position: sticky がなぜ効かないのかしばらく悩んだ。親要素に overflow: hidden がついてると動かない。罠すぎる。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2024-12-22</p>
+        <p class="entry-text">box-sizing: border-box を全称セレクタで当てるのが当たり前らしい。padding を足してもボックスのサイズが変わらないのは確かに便利。</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-line"></div>
+      <div class="entry-body">
+        <p class="entry-date">2024-12-18</p>
+        <p class="entry-text">clamp() を覚えた。clamp(最小値, 推奨値, 最大値) で流体タイポグラフィが実現できる。vw をそのまま使うと極端になるからこれで制御するのがベター。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>GREEN GRID &mdash; web design study log &nbsp;|&nbsp; <a href="about.html">about</a></p>
+  </footer>
+
+</body>
+</html>
