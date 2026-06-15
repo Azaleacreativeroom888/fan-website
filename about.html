@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — GREEN GRID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:     #7CB82F;
+      --green-lt:  #A8D45E;
+      --green-bg:  #F2F8E8;
+      --red:       #D63B3B;
+      --red-lt:    #F2A0A0;
+      --dark:      #1E2D0E;
+      --mid:       #4A6322;
+      --white:     #FFFFFF;
+      --serif:     'Syne', sans-serif;
+      --sans:      'Inter', sans-serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--green-bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 2px solid var(--green);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--dark); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--red); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      border-bottom: 1px solid rgba(124,184,47,0.25);
+      background: var(--white);
+      padding: 2.8rem 2rem 2rem;
+    }
+    .page-header-inner {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .page-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    /* セクションラベル */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(124,184,47,0.3);
+    }
+
+    /* ── PROFILE CARD ── */
+    .profile-card {
+      background: var(--white);
+      border: 1.5px solid rgba(124,184,47,0.25);
+      border-radius: 6px;
+      padding: 2rem;
+      margin-bottom: 2.4rem;
+    }
+    .profile-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .profile-tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .profile-body {
+      font-size: 0.9rem;
+      line-height: 1.95;
+      color: var(--mid);
+    }
+    .profile-body p { margin-bottom: 0.85rem; }
+    .profile-body p:last-child { margin-bottom: 0; }
+
+    /* ── LINK GRID ── */
+    .link-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-bottom: 2.4rem;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      background: var(--white);
+      border: 1.5px solid rgba(124,184,47,0.25);
+      border-radius: 6px;
+      padding: 0.9rem 1rem;
+      text-decoration: none;
+      color: var(--dark);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .link-card:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+    .link-icon {
+      font-size: 1.1rem;
+      width: 36px;
+      height: 36px;
+      background: var(--green-bg);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .link-text { flex: 1; min-width: 0; }
+    .link-name {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.1rem;
+    }
+    .link-desc {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+    }
+    .link-arrow {
+      color: var(--green);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .link-card:hover .link-arrow { transform: translateX(3px); }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--white);
+      border: 1.5px solid rgba(124,184,47,0.25);
+      border-radius: 6px;
+      padding: 2rem;
+    }
+    .form-intro {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1.4rem;
+    }
+    .form-success {
+      background: rgba(124,184,47,0.1);
+      border: 1px solid rgba(124,184,47,0.4);
+      border-radius: 4px;
+      padding: 0.85rem 1rem;
+      color: var(--mid);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .required { color: var(--red); margin-left: 2px; }
+    .form-input, .form-textarea {
+      width: 100%;
+      background: var(--green-bg);
+      border: 1.5px solid rgba(124,184,47,0.3);
+      border-radius: 4px;
+      color: var(--dark);
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      padding: 0.6rem 0.85rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: #aaa; }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(124,184,47,0.12);
+    }
+    .form-textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green);
+      border: 2px solid var(--green);
+      border-radius: 4px;
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 1.5rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .form-submit:hover {
+      background: var(--dark);
+      border-color: var(--dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    footer a { color: var(--green-lt); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav ul { gap: 1.2rem; }
+      nav a { font-size: 0.7rem; }
+      .link-grid { grid-template-columns: 1fr; }
+      .profile-card, .form-card { padding: 1.4rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">GREEN<span>GRID</span></a>
+    <ul>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="column.html">Column</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <p class="page-eyebrow">// about this site</p>
+      <h1 class="page-title">About</h1>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- 紹介文 -->
+    <div class="section-label">Profile</div>
+    <div class="profile-card">
+      <div class="profile-name">GREEN GRID 運営者</div>
+      <div class="profile-tag">// web design learner</div>
+      <div class="profile-body">
+        <p>ウェブデザインを一から学んでいます。HTMLとCSSを書き始めたころは、なぜこのコードがこう見えるのかさっぱりわかりませんでした。</p>
+        <p>試行錯誤しながら少しずつ仕組みが見えてきて、「ここが繋がった！」という瞬間がたまらなく楽しい。レイアウト・タイポグラフィ・色彩——デザインを学ぶほど、ものの見え方が変わってきます。</p>
+        <p>このサイトは、その過程をそのまま記録する場所です。わかったこと、つまずいたこと、発見したこと。正直に書いていきます。</p>
+      </div>
+    </div>
+
+    <!-- リンク -->
+    <div class="section-label">Links</div>
+    <div class="link-grid">
+
+      <a class="link-card" href="blog.html">
+        <div class="link-icon">📝</div>
+        <div class="link-text">
+          <span class="link-name">学習ブログ</span>
+          <span class="link-desc">日々の進捗メモ</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="column.html">
+        <div class="link-icon">📖</div>
+        <div class="link-text">
+          <span class="link-name">コラム</span>
+          <span class="link-desc">習ったことのまとめ</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://bsky.app/" target="_blank" rel="noopener">
+        <div class="link-icon">🦋</div>
+        <div class="link-text">
+          <span class="link-name">Bluesky</span>
+          <span class="link-desc">近況・お知らせ</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">
+        <div class="link-icon">🎨</div>
+        <div class="link-text">
+          <span class="link-name">メインサイト</span>
+          <span class="link-desc">他のサイト一覧</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+    </div>
+
+    <!-- お問い合わせ -->
+    <div class="section-label">Contact</div>
+    <div class="form-card">
+      <p class="form-intro">ご質問・ご感想はこちらからどうぞ。</p>
+
+      <div class="form-success" id="form-success">
+        ✉️ メッセージを送信しました。ありがとうございます！
+      </div>
+
+      <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="name">お名前</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="名前">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス<span class="required">*</span></label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">メッセージ<span class="required">*</span></label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="メッセージを入力してください…" required></textarea>
+        </div>
+        <button class="form-submit" type="submit">送信する →</button>
+      </form>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>GREEN GRID &mdash; web design study log &nbsp;|&nbsp; <a href="about.html">about</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit');
+      btn.disabled = true;
+      btn.textContent = '送信中…';
+      try {
+        const res = await fetch(this.action, {
+          method: 'POST',
+          body: new FormData(this),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.getElementById('form-success').style.display = 'block';
+          this.reset();
+        }
+      } catch(err) {}
+      btn.disabled = false;
+      btn.textContent = '送信する →';
+    });
+  </script>
+
+</body>
+</html>
