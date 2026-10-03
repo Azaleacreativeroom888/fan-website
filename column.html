@@ -265,29 +265,6 @@
   <!-- COLUMNS -->
   <div class="column-wrap">
 
-    <article class="column-card">
-      <div class="column-card-head">
-        <span class="column-num">01</span>
-        <div class="column-head-text">
-          <p class="column-date">2026-07-08</p>
-          <h2 class="column-title">サイトマップについて</h2>
-        </div>
-      </div>
-      <div class="column-card-body">
-        <p class="column-summary">
-          <strong>サイトマップ</strong>とは、Webサイトの構造を示す設計図のようなもので、
-          ユーザーや検索エンジンに対して、どのようなページが存在し、
-          どのように階層化されているかを伝える役割を果たす。
-          サイトマップがあることで、訪問者は求める情報に簡単にアクセスでき、
-          検索エンジンはサイト全体を正しく理解するための手助けとなる。
-        </p>
-        <div class="tag-row">
-          <span class="tag">サイトマップ</span>
-          <span class="tag">検索エンジン</span>
-        </div>
-      </div>
-    </article>
-
     <!-- #01 -->
     <article class="column-card">
       <div class="column-card-head">
@@ -426,6 +403,124 @@
           <span class="tag">タイポグラフィ</span>
           <span class="tag">レスポンシブ</span>
           <span class="tag">clamp</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- #05 -->
+    <article class="column-card">
+      <div class="column-card-head">
+        <span class="column-num">05</span>
+        <div class="column-head-text">
+          <p class="column-date">2025-01-15</p>
+          <h2 class="column-title">px の大きさ比較表 — 10px〜30px 実寸ガイド</h2>
+        </div>
+      </div>
+      <div class="column-card-body">
+        <p class="column-summary">
+          「16px ってどのくらい？」が直感でわかるように、実際のピクセルサイズを並べた早見表。左の■が実寸のボックス、右のテキストも同じfont-sizeで表示している。16px はブラウザの標準サイズ＝1rem の基準になる重要な値。
+        </p>
+
+        <!-- px 比較表 -->
+        <div style="margin-top: 1rem; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+            <colgroup>
+              <col style="width: 70px;">
+              <col style="width: auto;">
+              <col style="width: 140px;">
+            </colgroup>
+            <thead>
+              <tr style="border-bottom: 2px solid rgba(124,184,47,0.3);">
+                <th style="font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--mid); font-weight: 500; text-align: left; padding: 0 0 8px;">px値</th>
+                <th style="font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--mid); font-weight: 500; text-align: left; padding: 0 0 8px;">実寸</th>
+                <th style="font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--mid); font-weight: 500; text-align: left; padding: 0 0 8px;">用途の例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">10px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:10px;height:10px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:10px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">小さめの補足テキスト</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">11px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:11px;height:11px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:11px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">ラベル・キャプション</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">12px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:12px;height:12px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:12px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">タグ・バッジ文字</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">13px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:13px;height:13px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:13px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">補足・注釈テキスト</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12); background: var(--green-bg);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">14px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:14px;height:14px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:14px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">ナビ・UI文字</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">15px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:15px;height:15px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:15px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">本文（やや小）</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12); background: rgba(124,184,47,0.08);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--green); font-weight: 500; padding: 9px 0;">16px ★</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:16px;height:16px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:16px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--green); font-weight: 500; padding: 9px 0;">ブラウザ標準・1rem</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">17px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:17px;height:17px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:17px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">本文（ゆったり）</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">18px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:18px;height:18px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:18px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">リード文・小見出し</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">20px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:20px;height:20px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:20px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">h3 見出し</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">24px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:24px;height:24px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:24px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">h2 見出し</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(124,184,47,0.12);">
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">28px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:28px;height:28px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:28px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">h1 見出し（小）</td>
+              </tr>
+              <tr>
+                <td style="font-family: var(--mono); font-size: 0.78rem; color: var(--mid); padding: 9px 0;">30px</td>
+                <td style="padding: 9px 0;"><div style="display:flex; align-items:center; gap:10px;"><div style="width:30px;height:30px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:30px;color:var(--mid);line-height:1;">← この高さ</span></div></td>
+                <td style="font-size: 0.78rem; color: var(--mid); padding: 9px 0;">h1 見出し（標準）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 凡例 -->
+        <div style="margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(124,184,47,0.2); display: flex; gap: 1.2rem; flex-wrap: wrap;">
+          <span style="display:flex; align-items:center; gap:5px; font-size:0.75rem; color:var(--mid);">
+            <span style="display:inline-block;width:10px;height:10px;background:var(--green);border-radius:2px;"></span>★ = 基準値（1rem）
+          </span>
+          <span style="display:flex; align-items:center; gap:5px; font-size:0.75rem; color:var(--mid);">
+            <span style="display:inline-block;width:10px;height:10px;background:rgba(124,184,47,0.08);border:1px solid rgba(124,184,47,0.3);border-radius:2px;"></span>緑ハイライト = よく使う重要値
+          </span>
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">CSS</span>
+          <span class="tag">px</span>
+          <span class="tag">フォントサイズ</span>
+          <span class="tag">単位</span>
         </div>
       </div>
     </article>
