@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML辞典 — GREEN GRID</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:    #7CB82F;
+      --green-lt: #A8D45E;
+      --green-bg: #F2F8E8;
+      --red:      #D63B3B;
+      --red-lt:   #F2A0A0;
+      --dark:     #1E2D0E;
+      --mid:      #4A6322;
+      --white:    #FFFFFF;
+      --serif:    'Syne', sans-serif;
+      --sans:     'Inter', sans-serif;
+      --mono:     'DM Mono', monospace;
+    }
+    body { font-family: var(--sans); background: var(--green-bg); color: var(--dark); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white); border-bottom: 2px solid var(--green);
+      padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .nav-logo { font-family: var(--mono); font-size: 0.85rem; color: var(--green); letter-spacing: 0.1em; text-decoration: none; }
+    .nav-logo span { color: var(--dark); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { font-family: var(--mono); font-size: 0.78rem; color: var(--mid); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    nav a:hover { color: var(--green); }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--white); border-bottom: 1px solid rgba(124,184,47,0.25); padding: 2.8rem 2rem 2rem; }
+    .page-header-inner { max-width: 860px; margin: 0 auto; }
+    .breadcrumb { font-family: var(--mono); font-size: 0.68rem; color: var(--mid); margin-bottom: 0.8rem; }
+    .breadcrumb a { color: var(--green); text-decoration: none; }
+    .page-eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--red); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .page-title { font-family: var(--serif); font-size: 2.2rem; font-weight: 800; color: var(--dark); line-height: 1; }
+
+    /* MAIN */
+    .main { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; display: flex; flex-direction: column; gap: 3rem; }
+
+    /* セクションラベル */
+    .section-label {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.22em; color: var(--green);
+      text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(124,184,47,0.3); }
+
+    /* カード */
+    .card { background: var(--white); border: 1.5px solid rgba(124,184,47,0.25); border-radius: 6px; padding: 1.8rem 2rem; }
+
+    /* ── px比較表 ── */
+    .px-table { width: 100%; border-collapse: collapse; }
+    .px-table th {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--mid);
+      font-weight: 500; text-align: left; padding: 0 0 8px;
+      border-bottom: 2px solid rgba(124,184,47,0.3);
+    }
+    .px-table td { padding: 8px 0; border-bottom: 1px solid rgba(124,184,47,0.12); }
+    .px-table tr:last-child td { border-bottom: none; }
+    .px-val { font-family: var(--mono); font-size: 0.78rem; color: var(--mid); width: 72px; }
+    .px-val.star { color: var(--green); font-weight: 500; }
+    .px-box-wrap { display: flex; align-items: center; gap: 10px; }
+    .px-usage { font-size: 0.78rem; color: var(--mid); width: 150px; }
+    .px-usage.star { color: var(--green); font-weight: 500; }
+    .row-hl { background: rgba(124,184,47,0.08); }
+    .row-sub { background: var(--green-bg); }
+    .legend { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(124,184,47,0.2); display: flex; gap: 1.4rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--mid); }
+    .ldot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+
+    /* ── タグ辞典 ── */
+    .dict-grid { display: flex; flex-direction: column; gap: 0; }
+    .dict-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border-bottom: 1px solid rgba(124,184,47,0.12);
+      align-items: stretch;
+    }
+    .dict-row:last-child { border-bottom: none; }
+    .dict-tag {
+      padding: 0.9rem 1rem;
+      background: var(--green-bg);
+      border-right: 1px solid rgba(124,184,47,0.2);
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .dict-tag code {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--dark);
+      background: var(--white);
+      border: 1px solid rgba(124,184,47,0.35);
+      border-radius: 3px;
+      padding: 0.15rem 0.5rem;
+    }
+    .dict-tag .tag-cat {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      text-transform: uppercase;
+    }
+    .dict-body { padding: 0.9rem 1.2rem; }
+    .dict-desc {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--mid);
+      margin-bottom: 0.55rem;
+    }
+    .dict-example {
+      background: var(--dark);
+      border-radius: 3px;
+      padding: 0.6rem 0.9rem;
+      overflow-x: auto;
+    }
+    .dict-example code {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      line-height: 1.7;
+      color: var(--green-lt);
+      white-space: pre;
+    }
+    .dict-example code .tg { color: #ffd580; }
+    .dict-example code .at { color: #82aaff; }
+    .dict-example code .vl { color: #A8D45E; }
+    .dict-example code .tx { color: rgba(255,255,255,0.8); }
+
+    /* カテゴリ見出し */
+    .cat-head {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      background: var(--mid);
+      padding: 0.45rem 1rem;
+      text-transform: uppercase;
+    }
+
+    /* 戻るリンク */
+    .back-link { font-family: var(--mono); font-size: 0.75rem; color: var(--mid); text-decoration: none; }
+    .back-link:hover { color: var(--green); }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 2rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; }
+    footer a { color: var(--green-lt); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 1.2rem; }
+      .dict-row { grid-template-columns: 1fr; }
+      .dict-tag { border-right: none; border-bottom: 1px solid rgba(124,184,47,0.2); }
+      .card { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">GREEN<span>GRID</span></a>
+  <ul>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="column.html">Column</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="breadcrumb"><a href="column.html">Column</a> › レポート</p>
+    <p class="page-eyebrow">// report 01</p>
+    <h1 class="page-title">HTML 辞典</h1>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- ① px比較表 -->
+  <div>
+    <div class="section-label">// px の大きさ比較</div>
+    <div class="card">
+      <table class="px-table">
+        <thead>
+          <tr>
+            <th style="width:72px;">px値</th>
+            <th>実寸</th>
+            <th style="width:150px;">用途の例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="px-val">10px</td><td><div class="px-box-wrap"><div style="width:10px;height:10px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:10px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">小さめの補足テキスト</td></tr>
+          <tr><td class="px-val">11px</td><td><div class="px-box-wrap"><div style="width:11px;height:11px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:11px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">ラベル・キャプション</td></tr>
+          <tr><td class="px-val">12px</td><td><div class="px-box-wrap"><div style="width:12px;height:12px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:12px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">タグ・バッジ文字</td></tr>
+          <tr><td class="px-val">13px</td><td><div class="px-box-wrap"><div style="width:13px;height:13px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:13px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">補足・注釈テキスト</td></tr>
+          <tr class="row-sub"><td class="px-val">14px</td><td><div class="px-box-wrap"><div style="width:14px;height:14px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:14px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">ナビ・UI文字</td></tr>
+          <tr><td class="px-val">15px</td><td><div class="px-box-wrap"><div style="width:15px;height:15px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:15px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">本文（やや小）</td></tr>
+          <tr class="row-hl"><td class="px-val star">16px ★</td><td><div class="px-box-wrap"><div style="width:16px;height:16px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:16px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage star">ブラウザ標準・1rem</td></tr>
+          <tr><td class="px-val">17px</td><td><div class="px-box-wrap"><div style="width:17px;height:17px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:17px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">本文（ゆったり）</td></tr>
+          <tr><td class="px-val">18px</td><td><div class="px-box-wrap"><div style="width:18px;height:18px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:18px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">リード文・小見出し</td></tr>
+          <tr><td class="px-val">20px</td><td><div class="px-box-wrap"><div style="width:20px;height:20px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:20px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">h3 見出し</td></tr>
+          <tr><td class="px-val">24px</td><td><div class="px-box-wrap"><div style="width:24px;height:24px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:24px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">h2 見出し</td></tr>
+          <tr><td class="px-val">28px</td><td><div class="px-box-wrap"><div style="width:28px;height:28px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:28px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">h1 見出し（小）</td></tr>
+          <tr><td class="px-val">30px</td><td><div class="px-box-wrap"><div style="width:30px;height:30px;background:var(--green);border-radius:2px;flex-shrink:0;"></div><span style="font-size:30px;color:var(--mid);line-height:1;">← この高さ</span></div></td><td class="px-usage">h1 見出し（標準）</td></tr>
+        </tbody>
+      </table>
+      <div class="legend">
+        <div class="legend-item"><span class="ldot" style="background:var(--green);"></span>★ = 基準値（1rem）</div>
+        <div class="legend-item"><span class="ldot" style="background:rgba(124,184,47,0.08);border:1px solid rgba(124,184,47,0.3);"></span>緑ハイライト = よく使う重要値</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② タグ辞典 -->
+  <div>
+    <div class="section-label">// HTMLタグ一覧</div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="dict-grid">
+
+        <!-- ── 文書構造 ── -->
+        <div class="cat-head">文書構造</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">基本</span><code>&lt;!DOCTYPE html&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">HTML5 文書であることをブラウザに宣言する。必ず1行目に書く。</p>
+            <div class="dict-example"><code><span class="tg">&lt;!DOCTYPE html&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">基本</span><code>&lt;html&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">ページ全体を囲むルート要素。<code>lang</code> 属性で言語を指定する。</p>
+            <div class="dict-example"><code><span class="tg">&lt;html</span> <span class="at">lang</span>=<span class="vl">"ja"</span><span class="tg">&gt;</span><span class="tx">…</span><span class="tg">&lt;/html&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">基本</span><code>&lt;head&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">タイトルや文字コードなど、ページの情報（メタ情報）を入れる場所。画面には表示されない。</p>
+            <div class="dict-example"><code><span class="tg">&lt;head&gt;
+  &lt;meta</span> <span class="at">charset</span>=<span class="vl">"UTF-8"</span><span class="tg">&gt;
+  &lt;title&gt;</span><span class="tx">ページタイトル</span><span class="tg">&lt;/title&gt;
+&lt;/head&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">基本</span><code>&lt;body&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">画面に表示されるコンテンツをすべてここに書く。</p>
+            <div class="dict-example"><code><span class="tg">&lt;body&gt;</span><span class="tx">…表示内容…</span><span class="tg">&lt;/body&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── 見出し・テキスト ── -->
+        <div class="cat-head">見出し・テキスト</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">見出し</span><code>&lt;h1&gt; 〜 &lt;h6&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">見出しタグ。h1 が最大・最重要、h6 が最小。1ページに h1 は1つが基本。</p>
+            <div class="dict-example"><code><span class="tg">&lt;h1&gt;</span><span class="tx">大見出し</span><span class="tg">&lt;/h1&gt;</span>
+<span class="tg">&lt;h2&gt;</span><span class="tx">中見出し</span><span class="tg">&lt;/h2&gt;</span>
+<span class="tg">&lt;h3&gt;</span><span class="tx">小見出し</span><span class="tg">&lt;/h3&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">テキスト</span><code>&lt;p&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">段落（paragraph）。本文テキストの基本単位。</p>
+            <div class="dict-example"><code><span class="tg">&lt;p&gt;</span><span class="tx">ここに本文テキストを書く。</span><span class="tg">&lt;/p&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">テキスト</span><code>&lt;span&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">インライン要素。テキストの一部だけスタイルを変えたいときに使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;p&gt;</span><span class="tx">ここだけ</span><span class="tg">&lt;span</span> <span class="at">style</span>=<span class="vl">"color:red;"</span><span class="tg">&gt;</span><span class="tx">赤くする</span><span class="tg">&lt;/span&gt;</span><span class="tx">。</span><span class="tg">&lt;/p&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">テキスト</span><code>&lt;strong&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">重要な語句を太字にする。見た目だけでなく意味的な強調も持つ。</p>
+            <div class="dict-example"><code><span class="tg">&lt;p&gt;</span><span class="tx">これは</span><span class="tg">&lt;strong&gt;</span><span class="tx">重要</span><span class="tg">&lt;/strong&gt;</span><span class="tx">なポイント。</span><span class="tg">&lt;/p&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">テキスト</span><code>&lt;br&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">強制改行。閉じタグなし。テキスト途中で改行したいときに使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;p&gt;</span><span class="tx">1行目</span><span class="tg">&lt;br&gt;</span><span class="tx">2行目</span><span class="tg">&lt;/p&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── リンク・メディア ── -->
+        <div class="cat-head">リンク・メディア</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">リンク</span><code>&lt;a&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">リンク（anchor）。<code>href</code> にURLを指定する。別タブで開くには <code>target="_blank"</code> を追加。</p>
+            <div class="dict-example"><code><span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"page.html"</span><span class="tg">&gt;</span><span class="tx">リンクテキスト</span><span class="tg">&lt;/a&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">メディア</span><code>&lt;img&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">画像を表示する。<code>src</code> にファイルパス、<code>alt</code> に代替テキスト（必須）を指定。閉じタグなし。</p>
+            <div class="dict-example"><code><span class="tg">&lt;img</span> <span class="at">src</span>=<span class="vl">"photo.jpg"</span> <span class="at">alt</span>=<span class="vl">"写真の説明"</span><span class="tg">&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── レイアウト ── -->
+        <div class="cat-head">レイアウト</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">ブロック</span><code>&lt;div&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">汎用のブロック要素。レイアウトのグループ化に使う。意味を持たないコンテナ。</p>
+            <div class="dict-example"><code><span class="tg">&lt;div</span> <span class="at">style</span>=<span class="vl">"display: flex;"</span><span class="tg">&gt;
+  </span><span class="tx">…コンテンツ…</span>
+<span class="tg">&lt;/div&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">セマンティック</span><code>&lt;header&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">ページやセクションのヘッダー部分。ロゴ・ナビなどを入れる。</p>
+            <div class="dict-example"><code><span class="tg">&lt;header&gt;</span><span class="tx">…ナビ・ロゴ…</span><span class="tg">&lt;/header&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">セマンティック</span><code>&lt;main&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">ページのメインコンテンツ。1ページに1つだけ使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;main&gt;</span><span class="tx">…主要コンテンツ…</span><span class="tg">&lt;/main&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">セマンティック</span><code>&lt;section&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">意味のあるひとまとまりのコンテンツを区切るタグ。見出しとセットで使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;section&gt;
+  &lt;h2&gt;</span><span class="tx">セクション名</span><span class="tg">&lt;/h2&gt;
+  &lt;p&gt;</span><span class="tx">内容</span><span class="tg">&lt;/p&gt;
+&lt;/section&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">セマンティック</span><code>&lt;footer&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">ページの末尾。コピーライトやリンクなどを入れる。</p>
+            <div class="dict-example"><code><span class="tg">&lt;footer&gt;</span><span class="tx">© 2025 GREEN GRID</span><span class="tg">&lt;/footer&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">セマンティック</span><code>&lt;nav&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">ナビゲーションリンクをまとめるタグ。メニューバーなどに使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;nav&gt;
+  &lt;a</span> <span class="at">href</span>=<span class="vl">"index.html"</span><span class="tg">&gt;</span><span class="tx">Home</span><span class="tg">&lt;/a&gt;
+&lt;/nav&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── リスト ── -->
+        <div class="cat-head">リスト</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">リスト</span><code>&lt;ul&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">順序なしリスト（箇条書き）。<code>&lt;li&gt;</code> を子要素に持つ。</p>
+            <div class="dict-example"><code><span class="tg">&lt;ul&gt;
+  &lt;li&gt;</span><span class="tx">りんご</span><span class="tg">&lt;/li&gt;
+  &lt;li&gt;</span><span class="tx">みかん</span><span class="tg">&lt;/li&gt;
+&lt;/ul&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">リスト</span><code>&lt;ol&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">順序ありリスト（番号つき）。手順や順位を表すときに使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;ol&gt;
+  &lt;li&gt;</span><span class="tx">まず〇〇する</span><span class="tg">&lt;/li&gt;
+  &lt;li&gt;</span><span class="tx">次に△△する</span><span class="tg">&lt;/li&gt;
+&lt;/ol&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── 表 ── -->
+        <div class="cat-head">表</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">テーブル</span><code>&lt;table&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">表全体を囲む。<code>&lt;thead&gt;</code>（ヘッダー）・<code>&lt;tbody&gt;</code>（本体）・<code>&lt;tr&gt;</code>（行）・<code>&lt;th&gt;</code>/<code>&lt;td&gt;</code>（セル）で構成する。</p>
+            <div class="dict-example"><code><span class="tg">&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;</span><span class="tx">名前</span><span class="tg">&lt;/th&gt;&lt;th&gt;</span><span class="tx">説明</span><span class="tg">&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;</span><span class="tx">div</span><span class="tg">&lt;/td&gt;&lt;td&gt;</span><span class="tx">汎用ブロック</span><span class="tg">&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── フォーム ── -->
+        <div class="cat-head">フォーム</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">フォーム</span><code>&lt;form&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">入力フォームを囲むタグ。<code>action</code> に送信先、<code>method</code> に送信方法（GET/POST）を指定。</p>
+            <div class="dict-example"><code><span class="tg">&lt;form</span> <span class="at">action</span>=<span class="vl">"send.php"</span> <span class="at">method</span>=<span class="vl">"POST"</span><span class="tg">&gt;
+  </span><span class="tx">…入力欄…</span>
+<span class="tg">&lt;/form&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">フォーム</span><code>&lt;input&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">入力欄。<code>type</code> で種類を変える（text / email / password / checkbox など）。閉じタグなし。</p>
+            <div class="dict-example"><code><span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"text"</span> <span class="at">placeholder</span>=<span class="vl">"名前を入力"</span><span class="tg">&gt;
+&lt;input</span> <span class="at">type</span>=<span class="vl">"email"</span> <span class="at">placeholder</span>=<span class="vl">"メールアドレス"</span><span class="tg">&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">フォーム</span><code>&lt;textarea&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">複数行のテキスト入力欄。<code>rows</code> で高さの目安を指定できる。</p>
+            <div class="dict-example"><code><span class="tg">&lt;textarea</span> <span class="at">rows</span>=<span class="vl">"5"</span> <span class="at">placeholder</span>=<span class="vl">"メッセージを入力…"</span><span class="tg">&gt;&lt;/textarea&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">フォーム</span><code>&lt;button&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">ボタン。<code>type="submit"</code> でフォーム送信、<code>type="button"</code> でJSと連携するときに使う。</p>
+            <div class="dict-example"><code><span class="tg">&lt;button</span> <span class="at">type</span>=<span class="vl">"submit"</span><span class="tg">&gt;</span><span class="tx">送信する</span><span class="tg">&lt;/button&gt;</span></code></div>
+          </div>
+        </div>
+
+        <!-- ── メタ・リソース ── -->
+        <div class="cat-head">メタ・リソース</div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">メタ</span><code>&lt;meta&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">文字コード・viewport・SNSカードなどの設定を書く。<code>&lt;head&gt;</code> 内に置く。閉じタグなし。</p>
+            <div class="dict-example"><code><span class="tg">&lt;meta</span> <span class="at">charset</span>=<span class="vl">"UTF-8"</span><span class="tg">&gt;
+&lt;meta</span> <span class="at">name</span>=<span class="vl">"viewport"</span> <span class="at">content</span>=<span class="vl">"width=device-width, initial-scale=1.0"</span><span class="tg">&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">リソース</span><code>&lt;link&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">外部CSSやフォントを読み込む。<code>&lt;head&gt;</code> 内に書く。閉じタグなし。</p>
+            <div class="dict-example"><code><span class="tg">&lt;link</span> <span class="at">rel</span>=<span class="vl">"stylesheet"</span> <span class="at">href</span>=<span class="vl">"style.css"</span><span class="tg">&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">スクリプト</span><code>&lt;script&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">JavaScriptを書く・読み込む。<code>&lt;/body&gt;</code> の直前に置くのが基本。</p>
+            <div class="dict-example"><code><span class="tg">&lt;script</span> <span class="at">src</span>=<span class="vl">"app.js"</span><span class="tg">&gt;&lt;/script&gt;</span>
+<span class="tg">&lt;script&gt;</span><span class="tx">console.log("hello");</span><span class="tg">&lt;/script&gt;</span></code></div>
+          </div>
+        </div>
+
+        <div class="dict-row">
+          <div class="dict-tag"><span class="tag-cat">リソース</span><code>&lt;style&gt;</code></div>
+          <div class="dict-body">
+            <p class="dict-desc">HTMLファイル内に直接CSSを書く。<code>&lt;head&gt;</code> 内に置く。</p>
+            <div class="dict-example"><code><span class="tg">&lt;style&gt;</span>
+  <span class="tx">body { background: #F2F8E8; }</span>
+<span class="tg">&lt;/style&gt;</span></code></div>
+          </div>
+        </div>
+
+      </div><!-- /.dict-grid -->
+    </div><!-- /.card -->
+  </div>
+
+  <a href="column.html" class="back-link">← Column に戻る</a>
+
+</main>
+
+<footer>
+  <p>GREEN GRID &mdash; web design study log &nbsp;|&nbsp; <a href="about.html">about</a></p>
+</footer>
+
+</body>
+</html>
